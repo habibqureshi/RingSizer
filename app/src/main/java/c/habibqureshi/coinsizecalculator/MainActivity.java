@@ -101,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
                      //   sideCircle.getLayoutParams().width = sideCircle.getLayoutParams().width - 5;
                         circle.requestLayout();
                     }
+                    else
+                    {
+                        circle.setVisibility(View.GONE);
+                    }
                     break;
             }
             Log.e("Margin",margin+"");

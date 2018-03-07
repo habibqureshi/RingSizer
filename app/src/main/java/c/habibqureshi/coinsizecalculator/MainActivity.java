@@ -1,11 +1,13 @@
 package c.habibqureshi.coinsizecalculator;
 
 import android.app.Activity;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,7 +21,7 @@ import javax.security.auth.login.LoginException;
 
 public class MainActivity extends AppCompatActivity {
     LinearLayout uper,lower;
-    Button inc,dec;
+    ImageView inc,dec;
     TextView inch;
     ImageView circle , sideCircle;
 
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         setdpToinch(100);
     }
     private void init(){
+        inc.setOnTouchListener(touchListener);
+        dec.setOnTouchListener(touchListener);
         inc.setOnClickListener(clickListener);
         dec.setOnClickListener(clickListener);
 
@@ -55,6 +59,31 @@ public class MainActivity extends AppCompatActivity {
         dec=findViewById(R.id.dec);
         inch=findViewById(R.id.inch);
     }
+
+    View.OnTouchListener touchListener=new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    ImageView imageView = (ImageView) view;
+                    //overlay is black with transparency of 0x77 (119)
+                    imageView.getDrawable().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                    imageView.invalidate();
+                    break;
+                }
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL: {
+                    ImageView imageView = (ImageView) view;
+                    //clear the overlay
+                    imageView.getDrawable().clearColorFilter();
+                    imageView.invalidate();
+                    break;
+                }
+            }
+
+            return false;
+        }
+    };
     View.OnClickListener clickListener =new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -63,22 +92,21 @@ public class MainActivity extends AppCompatActivity {
             RelativeLayout.LayoutParams circlePrams;
             switch (view.getId()){
                 case R.id.inc:
+                    circle.setVisibility(View.VISIBLE);
+                    sideCircle.setVisibility(View.VISIBLE);
                     margin=Integer.parseInt(uper.getContentDescription().toString());
                     Log.e("margingot",margin+"");
-                    margin+=5;
-                    params=(LinearLayout.LayoutParams)view.getLayoutParams();
+                    margin+=2;
+                    params=(LinearLayout.LayoutParams)uper.getLayoutParams();
                     params.setMargins(0,0,0,margin);
                     uper.requestLayout();
                     uper.setContentDescription(margin+"");
                     params= (LinearLayout.LayoutParams) lower.getLayoutParams();
                     params.setMargins(0,margin,0,0);
                     lower.requestLayout();
-//                    circlePrams=new RelativeLayout.LayoutParams(margin*2,margin*2);
-//                    circlePrams.addRule(RelativeLayout.CENTER_IN_PARENT);
-//                    circle.setLayoutParams(circlePrams);
-                      circle.getLayoutParams().height=circle.getLayoutParams().height+5;
-                      circle.getLayoutParams().width=circle.getLayoutParams().width+5;
-                        sideCircle.getLayoutParams().height=sideCircle.getLayoutParams().height+5;
+                    circle.getLayoutParams().height=circle.getLayoutParams().height+4;
+                    circle.getLayoutParams().width=circle.getLayoutParams().width+4;
+                    sideCircle.getLayoutParams().height=sideCircle.getLayoutParams().height+4;
                  //       sideCircle.getLayoutParams().width=sideCircle.getLayoutParams().width+5;
 //                    circle.requestLayout();
 
@@ -86,29 +114,40 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.dec:
                     margin=Integer.parseInt(uper.getContentDescription().toString());
-                    margin-=5;
+
                     if(margin>0) {
-                        params = (LinearLayout.LayoutParams) view.getLayoutParams();
+                        margin-=2;
+                        circle.setVisibility(View.VISIBLE);
+                        sideCircle.setVisibility(View.VISIBLE);
+                        params = (LinearLayout.LayoutParams) uper.getLayoutParams();
                         params.setMargins(0, 0, 0, margin);
                         uper.requestLayout();
                         uper.setContentDescription(margin + "");
                         params = (LinearLayout.LayoutParams) lower.getLayoutParams();
                         params.setMargins(0, margin, 0, 0);
                         lower.requestLayout();
-                        circle.getLayoutParams().height = circle.getLayoutParams().height - 5;
-                        circle.getLayoutParams().width = circle.getLayoutParams().height - 5;
-                        sideCircle.getLayoutParams().height = sideCircle.getLayoutParams().height - 5;
+                        circle.getLayoutParams().height = circle.getLayoutParams().height - 4;
+                        circle.getLayoutParams().width = circle.getLayoutParams().height - 4;
+                        sideCircle.getLayoutParams().height = sideCircle.getLayoutParams().height - 4;
                      //   sideCircle.getLayoutParams().width = sideCircle.getLayoutParams().width - 5;
                         circle.requestLayout();
                     }
                     else
                     {
+                        params = (LinearLayout.LayoutParams) uper.getLayoutParams();
+                        params.setMargins(0, 0, 0, 0);
+                        uper.requestLayout();
+                        uper.setContentDescription(0 + "");
+                        params = (LinearLayout.LayoutParams) lower.getLayoutParams();
+                        params.setMargins(0, 0, 0, 0);
+                        lower.requestLayout();
                         circle.setVisibility(View.GONE);
+                        sideCircle.setVisibility(View.GONE);
                     }
                     break;
             }
             Log.e("Margin",margin+"");
-            setdpToinch(margin);
+            setdpToinch(margin*2);
 
 
         }
@@ -121,9 +160,11 @@ public class MainActivity extends AppCompatActivity {
     //    float density = metrics.density;
 //        float px = dp * (metrics.densityDpi/160f);
         float result= px/metrics.ydpi;
-        result=(result * 25.4f) * 3.14f;
-        String.format("%.1f",result);
-        inch.setText("Ring Size: "+(result));
+        Log.e("result","inc "+result);
+        result=(result) * 79.756f;
+        Log.e("result","mm "+result);
+
+        inch.setText((String.format("%.2f",result)));
 
     }
     void check(){

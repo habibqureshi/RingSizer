@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView inc,dec;
     TextView inch;
     ImageView circle , sideCircle;
+    int incVal=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     sideCircle.setVisibility(View.VISIBLE);
                     margin=Integer.parseInt(uper.getContentDescription().toString());
                     Log.e("margingot",margin+"");
-                    margin+=2;
+                    margin+=incVal;
                     params=(LinearLayout.LayoutParams)uper.getLayoutParams();
                     params.setMargins(0,0,0,margin);
                     uper.requestLayout();
@@ -104,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
                     params= (LinearLayout.LayoutParams) lower.getLayoutParams();
                     params.setMargins(0,margin,0,0);
                     lower.requestLayout();
-                    circle.getLayoutParams().height=circle.getLayoutParams().height+4;
-                    circle.getLayoutParams().width=circle.getLayoutParams().width+4;
-                    sideCircle.getLayoutParams().height=sideCircle.getLayoutParams().height+4;
+                    circle.getLayoutParams().height=circle.getLayoutParams().height+incVal+incVal;
+                    circle.getLayoutParams().width=circle.getLayoutParams().width+incVal+incVal;
+                    sideCircle.getLayoutParams().height=sideCircle.getLayoutParams().height+incVal+incVal;
                  //       sideCircle.getLayoutParams().width=sideCircle.getLayoutParams().width+5;
 //                    circle.requestLayout();
 
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     margin=Integer.parseInt(uper.getContentDescription().toString());
 
                     if(margin>0) {
-                        margin-=2;
+                        margin-=incVal;
                         circle.setVisibility(View.VISIBLE);
                         sideCircle.setVisibility(View.VISIBLE);
                         params = (LinearLayout.LayoutParams) uper.getLayoutParams();
@@ -126,9 +127,9 @@ public class MainActivity extends AppCompatActivity {
                         params = (LinearLayout.LayoutParams) lower.getLayoutParams();
                         params.setMargins(0, margin, 0, 0);
                         lower.requestLayout();
-                        circle.getLayoutParams().height = circle.getLayoutParams().height - 4;
-                        circle.getLayoutParams().width = circle.getLayoutParams().height - 4;
-                        sideCircle.getLayoutParams().height = sideCircle.getLayoutParams().height - 4;
+                        circle.getLayoutParams().height = circle.getLayoutParams().height - incVal-incVal;
+                        circle.getLayoutParams().width = circle.getLayoutParams().height - incVal-incVal;
+                        sideCircle.getLayoutParams().height = sideCircle.getLayoutParams().height - incVal-incVal;
                      //   sideCircle.getLayoutParams().width = sideCircle.getLayoutParams().width - 5;
                         circle.requestLayout();
                     }

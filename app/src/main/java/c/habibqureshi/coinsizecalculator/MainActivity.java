@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         findViews();
         init();
         check();
-        setdpToinch(100);
+        setdpToinch(Integer.parseInt(uper.getContentDescription().toString()));
     }
     private void init(){
         inc.setOnTouchListener(touchListener);
@@ -102,12 +102,12 @@ public class MainActivity extends AppCompatActivity {
                     params.setMargins(0,0,0,margin);
                     uper.requestLayout();
                     uper.setContentDescription(margin+"");
-                    params= (LinearLayout.LayoutParams) lower.getLayoutParams();
-                    params.setMargins(0,margin,0,0);
-                    lower.requestLayout();
-                    circle.getLayoutParams().height=circle.getLayoutParams().height+incVal+incVal;
-                    circle.getLayoutParams().width=circle.getLayoutParams().width+incVal+incVal;
-                    sideCircle.getLayoutParams().height=sideCircle.getLayoutParams().height+incVal+incVal;
+//                    params= (LinearLayout.LayoutParams) lower.getLayoutParams();
+//                    params.setMargins(0,margin,0,0);
+//                    lower.requestLayout();
+                    circle.getLayoutParams().height=circle.getLayoutParams().height+incVal;
+                    circle.getLayoutParams().width=circle.getLayoutParams().width+incVal;
+                    sideCircle.getLayoutParams().height=sideCircle.getLayoutParams().height+incVal;
                  //       sideCircle.getLayoutParams().width=sideCircle.getLayoutParams().width+5;
 //                    circle.requestLayout();
 
@@ -124,12 +124,12 @@ public class MainActivity extends AppCompatActivity {
                         params.setMargins(0, 0, 0, margin);
                         uper.requestLayout();
                         uper.setContentDescription(margin + "");
-                        params = (LinearLayout.LayoutParams) lower.getLayoutParams();
-                        params.setMargins(0, margin, 0, 0);
-                        lower.requestLayout();
-                        circle.getLayoutParams().height = circle.getLayoutParams().height - incVal-incVal;
-                        circle.getLayoutParams().width = circle.getLayoutParams().height - incVal-incVal;
-                        sideCircle.getLayoutParams().height = sideCircle.getLayoutParams().height - incVal-incVal;
+//                        params = (LinearLayout.LayoutParams) lower.getLayoutParams();
+//                        params.setMargins(0, margin, 0, 0);
+//                        lower.requestLayout();
+                        circle.getLayoutParams().height = circle.getLayoutParams().height - incVal;
+                        circle.getLayoutParams().width = circle.getLayoutParams().height - incVal;
+                        sideCircle.getLayoutParams().height = sideCircle.getLayoutParams().height - incVal;
                      //   sideCircle.getLayoutParams().width = sideCircle.getLayoutParams().width - 5;
                         circle.requestLayout();
                     }
@@ -144,11 +144,16 @@ public class MainActivity extends AppCompatActivity {
                         lower.requestLayout();
                         circle.setVisibility(View.GONE);
                         sideCircle.setVisibility(View.GONE);
+                        circle.getLayoutParams().height=0;
+                        circle.getLayoutParams().width=0;
+                        sideCircle.getLayoutParams().height=0;
+
+
                     }
                     break;
             }
             Log.e("Margin",margin+"");
-            setdpToinch(margin*2);
+            setdpToinch(margin);
 
 
         }

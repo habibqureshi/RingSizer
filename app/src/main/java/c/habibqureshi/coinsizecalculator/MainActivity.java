@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout uper,lower;
     ImageView inc,dec;
     TextView inch;
-    ImageView circle , sideCircle;
+    ImageView circle , sideCircle , strips;
     int incVal=1;
 
     @Override
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private void findViews(){
         sideCircle=findViewById(R.id.sideCircle);
         circle=findViewById(R.id.circle);
+        strips=findViewById(R.id.strip);
         uper=findViewById(R.id.uper);
         lower=findViewById(R.id.below);
         inc=findViewById(R.id.inc);
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     circle.getLayoutParams().height=circle.getLayoutParams().height+incVal;
                     circle.getLayoutParams().width=circle.getLayoutParams().width+incVal;
                     sideCircle.getLayoutParams().height=sideCircle.getLayoutParams().height+incVal;
-                 //       sideCircle.getLayoutParams().width=sideCircle.getLayoutParams().width+5;
+                    strips.getLayoutParams().height=strips.getLayoutParams().height + incVal;
 //                    circle.requestLayout();
 
 
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         circle.getLayoutParams().height = circle.getLayoutParams().height - incVal;
                         circle.getLayoutParams().width = circle.getLayoutParams().height - incVal;
                         sideCircle.getLayoutParams().height = sideCircle.getLayoutParams().height - incVal;
-                     //   sideCircle.getLayoutParams().width = sideCircle.getLayoutParams().width - 5;
+                        strips.getLayoutParams().height = strips.getLayoutParams().height - incVal;
                         circle.requestLayout();
                     }
                     else
@@ -147,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                         circle.getLayoutParams().height=0;
                         circle.getLayoutParams().width=0;
                         sideCircle.getLayoutParams().height=0;
+                        strips.getLayoutParams().height=0;
 
 
                     }

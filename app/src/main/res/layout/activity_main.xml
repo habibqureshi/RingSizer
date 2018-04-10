@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2b2b2b"
+    android:background="#000000"
 
     tools:context="c.habibqureshi.coinsizecalculator.MainActivity">
 
@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="26dp"
         android:textColor="#ffffff"
-        android:text="Ring Sizer"
+        android:text=" RING SIZER"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -23,28 +23,36 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/tittle"
         android:textColor="#ffffff"
-        android:textSize="20dp"
         android:text="Place your ring on the circle \nor your finger between the lines"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ImageView
         android:id="@+id/circle"
         android:layout_centerInParent="true"
-        android:src="@drawable/circle_final"
+        android:src="@drawable/circle_final_black"
         android:layout_width="70px"
         android:layout_height="72px" />
     <ImageView
-        android:background="@drawable/semi"
-
+        android:background="@drawable/semi_black"
+        android:layout_alignParentRight="true"
         android:id="@+id/sideCircle"
         android:layout_centerVertical="true"
-
+        android:layout_marginRight="5dp"
         android:layout_width="70px"
+        android:layout_height="70px" />
+    <ImageView
+        android:background="@drawable/strips"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/strip"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_width="35px"
         android:layout_height="70px" />
 
 
 
     <LinearLayout
+
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,7 +79,6 @@
         </LinearLayout>
 
         <LinearLayout
-
             android:id="@+id/below"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,31 +86,30 @@
            >
 
             <View
-
                 android:layout_width="match_parent"
                 android:layout_height="1dp" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:orientation="vertical"
         android:layout_above="@+id/buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:layout_gravity="center"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
 
-       =
+
         <TextView
             android:textSize="26dp"
             android:id="@+id/inch"
             android:textColor="#ffffff"
-            android:text=""
+            android:text="50.00"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         </LinearLayout>
@@ -116,11 +122,18 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/buttons"
-        android:layout_margin="30dp"
+        android:layout_margin="5dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/inc"
+            android:layout_margin="10dp"
+            android:src="@drawable/up"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
         <ImageView
             android:src="@drawable/down"
             android:id="@+id/dec"
@@ -130,13 +143,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/inc"
-            android:layout_margin="10dp"
-            android:src="@drawable/up"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 
